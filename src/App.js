@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Login from "./Components/Login/Login";
+import Register from "./Components/Register/Register";
 
 function App() {
+  useEffect(() => {
+    const getMoviesAxios = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:4000/api/user");
+        console.log(data);
+        setMovies(data);
+      } catch (err) {
+        console.log(err.data);
+      }
+    };
+    // getMovies();
+    getMoviesAxios().catch(null);
+  }, []);
+  const [movies, setMovies] = useState([]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Login></Login>
+      <Register></Register>
     </div>
   );
 }
+/*
+  /*{" "}
+      <div>
+        <h1>Lista de peliculas</h1>
+        <Container>
+          {" "}
+          <Row>
+            {movies.map((data) => (
+              <Col xs={3} className="mb-5" key={data.id}>
+                <VideoDetails data={data} />
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </div>
+      **/
 
 export default App;
