@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import SignInSignUp from "./page/SignInSignUp/SignInSignUp";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 function App() {
   useEffect(() => {
@@ -21,8 +25,13 @@ function App() {
   const [movies, setMovies] = useState([]);
   return (
     <div className="App">
-      <Login></Login>
-      <Register></Register>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/register">
+        <Register />
+      </Route>
+      <ToastContainer />
     </div>
   );
 }
